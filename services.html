@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevServices - Услуги по Python</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Навигация */
+        nav {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Главный баннер */
+        .hero {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background: #ff6b35;
+            color: white;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
+            background: #ff5722;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #0066cc;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f0f0;
+        }
+
+        /* Услуги */
+        .services {
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid #0066cc;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            color: #ff6b35;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-order {
+            width: 100%;
+            background: #ff6b35;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-order:hover {
+            background: #ff5722;
+        }
+
+        /* Портфолио */
+        .portfolio {
+            padding: 60px 20px;
+        }
+
+        .portfolio h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h3 {
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* О себе */
+        .about {
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+
+        .about h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-text h3 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .skills {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .skills li {
+            padding: 0.7rem 0;
+            color: #0066cc;
+            font-weight: 500;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-icon {
+            font-size: 8rem;
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* Контакты */
+        .contact {
+            padding: 60px 20px;
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-container p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-telegram {
+            background: #0088cc;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-telegram:hover {
+            background: #0077b5;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal h2 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+        }
+
+        .modal p {
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .modal-link {
+            display: inline-block;
+            background: #0088cc;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .modal-link:hover {
+            background: #0077b5;
+        }
+
+        /* Футер */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .btn-telegram {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav>
+        <div class="container">
+            <div class="logo">💻 DevServices</div>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#about">О себе</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Главный баннер -->
+    <section id="home" class="hero">
+        <div>
+            <h1>Python-проекты на заказ</h1>
+            <p>Качественные решения для вашего бизнеса</p>
+            <a href="#contact" class="btn">Заказать услугу</a>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Мои услуги</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">🐍</div>
+                    <h3>Разработка скриптов</h3>
+                    <p>Автоматизация задач, парсинг данных, обработка файлов</p>
+                    <div class="price">от $10</div>
+                    <button class="btn-order" onclick="orderService('Скрипты Python')">Заказать</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🌐</div>
+                    <h3>Веб-приложения</h3>
+                    <p>Django, Flask - полнофункциональные веб-приложения</p>
+                    <div class="price">от $100</div>
+                    <button class="btn-order" onclick="orderService('Веб-приложение')">Заказать</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Анализ данных</h3>
+                    <p>Pandas, NumPy, визуализация - обработка больших данных</p>
+                    <div class="price">от $50</div>
+                    <button class="btn-order" onclick="orderService('Анализ данных')">Заказать</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <h3>Боты и интеграции</h3>
+                    <p>Telegram боты, API интеграции, автоматизация</p>
+                    <div class="price">от $25</div>
+                    <button class="btn-order" onclick="orderService('Бот/Интеграция')">Заказать</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>Обслуживание кода</h3>
+                    <p>Исправление ошибок, оптимизация, доработка</p>
+                    <div class="price">от $15</div>
+                    <button class="btn-order" onclick="orderService('Обслуживание')">Заказать</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📚</div>
+                    <h3>Обучение Python</h3>
+                    <p>Консультации, помощь в обучении, помощь с домашкой</p>
+                    <div class="price">от $20</div>
+                    <button class="btn-order" onclick="orderService('Обучение')">Заказать</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2>Примеры работ</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">📈</div>
+                    <div class="portfolio-info">
+                        <h3>Парсер данных</h3>
+                        <p>Автоматический сбор данных с веб-сайтов с сохранением в БД</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">💬</div>
+                    <div class="portfolio-info">
+                        <h3>Telegram бот</h3>
+                        <p>Многофункциональный бот для управления задачами</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🛒</div>
+                    <div class="portfolio-info">
+                        <h3>Интернет-магазин</h3>
+                        <p>Полнофункциональный магазин на Django с платежами</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">📊</div>
+                    <div class="portfolio-info">
+                        <h3>Аналитический отчет</h3>
+                        <p>Анализ данных продаж с красивой визуализацией</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">🔐</div>
+                    <div class="portfolio-info">
+                        <h3>API сервис</h3>
+                        <p>REST API для мобильного приложения с аутентификацией</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item">
+                    <div class="portfolio-image">⚙️</div>
+                    <div class="portfolio-info">
+                        <h3>Автоматизация</h3>
+                        <p>Скрипт автоматизации рутинных задач в компании</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- О себе -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Обо мне</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Профессиональный разработчик Python</h3>
+                    <p>Я разработчик с опытом создания высокопроизводительных Python-приложений. Специализируюсь на разработке веб-приложений, автоматизации и анализе данных.</p>
+                    <p>Работаю быстро, качественно и по справедливым ценам. Каждый проект - индивидуальный подход.</p>
+                    <h3 style="margin-top: 1.5rem;">Мои навыки:</h3>
+                    <ul class="skills">
+                        <li>✓ Python 3.x (основной язык)</li>
+                        <li>✓ Django, Flask, FastAPI</li>
+                        <li>✓ Pandas, NumPy, Matplotlib</li>
+                        <li>✓ Telegram API, REST API</li>
+                        <li>✓ PostgreSQL, MongoDB</li>
+                        <li>✓ Git, Docker</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <div class="profile-icon">👨‍💻</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Готовы к сотрудничеству?</h2>
+            <div class="contact-container">
+                <p>Напишите мне в Telegram и я помогу вам с вашим проектом!</p>
+                <div class="contact-buttons">
+                    <a href="https://t.me/shop_program_lin" target="_blank" class="btn-telegram">
+                        ✈️ Написать в Telegram
+                    </a>
+                    <a href="mailto:your_email@gmail.com" class="btn-telegram" style="background: #ff6b35;">
+                        📧 Написать на email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 DevServices - Python-проекты на заказ. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно для заказа -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Оформить заказ</h2>
+            <p id="serviceName"></p>
+            <p>Чтобы оформить заказ этой услуги, напишите мне в Telegram:</p>
+            <a href="https://t.me/shop_program_lin" target="_blank" class="modal-link">
+                ✈️ Открыть Telegram
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Модальное окно
+        const modal = document.getElementById('orderModal');
+
+        function orderService(serviceName) {
+            document.getElementById('serviceName').textContent = `Услуга: ${serviceName}`;
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

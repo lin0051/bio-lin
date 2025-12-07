@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionHub - Магазин одежды</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Навигация */
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Главный баннер */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Категории */
+        .categories {
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+
+        .categories h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+
+        /* Товары */
+        .products {
+            padding: 60px 20px;
+        }
+
+        .products h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-rating {
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #764ba2;
+        }
+
+        /* О нас */
+        .about {
+            padding: 60px 20px;
+            background: #f8f9fa;
+        }
+
+        .about h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .about-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .about-list li {
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+            color: #667eea;
+        }
+
+        .placeholder {
+            font-size: 6rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+        }
+
+        /* Контакты */
+        .contact {
+            padding: 60px 20px;
+        }
+
+        .contact h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .contact-item h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        /* Футер */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav>
+        <div class="container">
+            <div class="logo">🛍️ FashionHub</div>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#products">Каталог</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#contact">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Главный баннер -->
+    <section id="home" class="hero">
+        <div>
+            <h1>Добро пожаловать в FashionHub</h1>
+            <p>Качественная и стильная одежда для каждого</p>
+            <button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+                Начать покупки
+            </button>
+        </div>
+    </section>
+
+    <!-- Категории -->
+    <section class="categories">
+        <div class="container">
+            <h2>Категории товаров</h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">👕</div>
+                    <h3>Футболки</h3>
+                    <p>Удобные футболки из качественного хлопка</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">👖</div>
+                    <h3>Джинсы</h3>
+                    <p>Модные джинсы на любой вкус</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">🧥</div>
+                    <h3>Куртки</h3>
+                    <p>Теплые куртки для холодного сезона</p>
+                </div>
+                <div class="category-card">
+                    <div class="category-icon">👗</div>
+                    <h3>Платья</h3>
+                    <p>Элегантные платья для любых случаев</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Товары -->
+    <section id="products" class="products">
+        <div class="container">
+            <h2>Популярные товары</h2>
+            <div class="product-grid" id="productGrid"></div>
+        </div>
+    </section>
+
+    <!-- О компании -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>О нас</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>FashionHub - это современный магазин качественной и стильной одежды для всей семьи. Мы предлагаем лучшие бренды и конкурентные цены на рынке.</p>
+                    <p>Наша миссия - сделать моду доступной, удобной и качественной для каждого.</p>
+                    <ul class="about-list">
+                        <li>✓ Гарантия качества</li>
+                        <li>✓ Быстрая доставка</li>
+                        <li>✓ Лучшие цены</li>
+                        <li>✓ 24/7 поддержка</li>
+                    </ul>
+                </div>
+                <div class="placeholder">📦</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Контактная информация</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>📍 Адрес</h3>
+                    <p>г. Москва, ул. Мода, 42</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📞 Телефон</h3>
+                    <p>+7 (999) 888-77-66</p>
+                </div>
+                <div class="contact-item">
+                    <h3>📧 Email</h3>
+                    <p>hello@fashionhub.ru</p>
+                </div>
+                <div class="contact-item">
+                    <h3>🕐 Время работы</h3>
+                    <p>Пн-Пт: 9:00 - 21:00<br>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FashionHub. Все права защищены. ❤️</p>
+        </div>
+    </footer>
+
+    <script>
+        // Товары в каталоге
+        const products = [
+            { name: 'Классическая футболка', price: 599, icon: '👕', rating: '★★★★★' },
+            { name: 'Синие джинсы', price: 1299, icon: '👖', rating: '★★★★☆' },
+            { name: 'Кожаная куртка', price: 2999, icon: '🧥', rating: '★★★★★' },
+            { name: 'Черное платье', price: 1799, icon: '👗', rating: '★★★★★' },
+            { name: 'Белая рубашка', price: 899, icon: '👕', rating: '★★★★☆' },
+            { name: 'Черные джинсы', price: 1199, icon: '👖', rating: '★★★★★' },
+            { name: 'Теплая куртка', price: 2199, icon: '🧥', rating: '★★★★☆' },
+            { name: 'Вечернее платье', price: 2499, icon: '👗', rating: '★★★★★' }
+        ];
+
+        // Загрузка товаров
+        function loadProducts() {
+            const grid = document.getElementById('productGrid');
+            products.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image">${p.icon}</div>
+                    <div class="product-info">
+                        <h3>${p.name}</h3>
+                        <div class="product-rating">${p.rating}</div>
+                        <div class="product-price">${p.price} ₽</div>
+                        <button class="add-to-cart" onclick="addToCart('${p.name}', ${p.price})">
+                            Добавить в корзину
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function addToCart(name, price) {
+            alert(`✓ "${name}" добавлен в корзину!\nЦена: ${price} ₽`);
+        }
+
+        // Плавная прокрутка для навигации
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Загрузка товаров при открытии
+        loadProducts();
+    </script>
+</body>
+</html>
